@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import Header from "./Header";
 import Note from "./Note";
 import CreateNote from "./CreateNote";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 
 const App=()=>
 {
@@ -28,7 +30,9 @@ const App=()=>
     return <>
         <Header/>
         <CreateNote passNote={addNote}/>
-        
+        <div className="container">
+        <div className="row ">
+            
         {addItem.map((val,index)=>
         {
             return( <Note key={index}
@@ -39,6 +43,10 @@ const App=()=>
                     />
             );
         })}
+        </div> 
+        </div>
+        
+        
      </>;
 }
 

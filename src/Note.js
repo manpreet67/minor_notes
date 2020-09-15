@@ -10,8 +10,13 @@ const Note=(props)=>
         props.deleteItem(props.id);
     }
     return <>
-    <div className="row">
-        <div className="note">
+    
+
+               
+    
+                
+                <div className="card text-center text-white bg-warning" style={{ width: '20rem' }}>
+                <div className="card-body">
 
             <h1>{props.title}</h1>
             <br/>
@@ -19,10 +24,12 @@ const Note=(props)=>
             <button className="btn" onClick={deleteNote}>
             <DeleteIcon className="del"> </DeleteIcon>
             </button>
-        
-
         </div>
-    </div>
+            
+            </div>
+        
+    
+    
      </>
 }
 

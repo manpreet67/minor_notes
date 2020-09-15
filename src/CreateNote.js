@@ -36,21 +36,35 @@ const CreateNote=(props)=>
 
     return  (<> 
        
-    
-    <div className="main">
-        <form>
-            <input type="text" name="title" value={note.title} onChange={InputEvent} placeholder="Title" autoComplete="off"/>
-           <br/>
-            <textarea rows="" column="" name="content" value={note.content} onChange={InputEvent} placeholder="Write here" >
-                </textarea>
-                <br/>
-       
-        <Button onClick={addEvent}>
-        <AddIcon className="plus"/>
-        </Button>
-        </form>
-    </div>
-    
+        <div className="container">
+            <div className="row">
+                <div className="col">
+
+                
+                <div className="card text-center text-white bg-warning mb-3" style={{ width: '20rem' }}>
+                <div className="card-body">
+                    <form>
+                    <div className="form-group">
+
+                        <input type="text" className="form-control" name="title" value={note.title} onChange={InputEvent} placeholder="Title" autoComplete="off"/>
+                    </div>
+                    <div className="form-group">
+                
+                        <textarea className="form-control" rows="" column="" name="content" value={note.content} onChange={InputEvent} placeholder="Write here"></textarea>
+                        </div>
+                        
+                            
+                
+                    <Button   onClick={addEvent}>
+                    <AddIcon className="plus"/>
+                    </Button>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+                
     
     </>
     );

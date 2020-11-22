@@ -1,53 +1,37 @@
-import React,{useState} from "react";
-import Header from "./Header";
-import Note from "./Note";
-import CreateNote from "./CreateNote";
+import React from "react";
+
+import {BrowserRouter,Route} from 'react-router-dom'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 
-const App=()=>
-{
-    const[addItem,setAddItem]=useState([]);
-    const addNote=(note)=>
-    {
-        setAddItem((prevData)=>{
-            return[...prevData,note];
-        });
-    };
-
-
-    const onDelete=(id)=>{
-
-        setAddItem((olddata)=>
-        olddata.filter((currdata,indx)=>
-        {
-            return indx!==id;
-        })
-        )
-
-    };
-    
-    return <>
-        <Header/>
-        <CreateNote passNote={addNote}/>
-        <div className="container">
-        <div className="row ">
+const App = () => {
+    return(
+        <BrowserRouter>
             
-        {addItem.map((val,index)=>
-        {
-            return( <Note key={index}
-                    id={index}
-                    title={val.title}
-                    content={val.content}
-                    deleteItem={onDelete}
-                    />
-            );
-        })}
-        </div> 
-        </div>
-        
-        
-     </>;
+               
+               <Navbar/>
+                <Route path="/signup">
+                    <Signup/>
+                    </Route>
+                
+
+                    <Route path="/signin">
+                    <Signin/>
+                    </Route>
+                    <Route path exact="/">
+                    <Home/>
+                    </Route>
+                
+                
+            
+    </BrowserRouter>    );
 }
+
+
+
 
 export default App;

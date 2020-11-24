@@ -8,7 +8,7 @@ const CreateNote=(props)=>
         title:"",
         content:"",
     });
-
+    
     const InputEvent=(event)=>{
 
         const {name,value}=event.target;
@@ -26,6 +26,7 @@ const CreateNote=(props)=>
     const addEvent=()=>
     {
         props.passNote(note);
+        
         setNote(
             {
                 title:"",
@@ -33,7 +34,8 @@ const CreateNote=(props)=>
             }
         )
     };
-
+    const isEnabled = note.title.length > 0 && note.content.length > 0;
+    
     return  (<> 
        
         <div className="container">
@@ -54,8 +56,8 @@ const CreateNote=(props)=>
                         </div>
                         
                             
-                
-                    <Button   onClick={addEvent}>
+                     
+                    <Button disabled={!isEnabled} onClick={addEvent}>
                     <AddIcon className="plus"/>
                     </Button>
                     </form>

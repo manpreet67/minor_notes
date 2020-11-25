@@ -8,18 +8,19 @@ import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 
+
 const App = () => {
     return(
         <BrowserRouter>
             
                
                <Navbar/>
-                <Route path="/signup">
+                <Route path ="/signup">
                     <Signup/>
                     </Route>
                 
 
-                    <Route path="/signin">
+                    <Route path ="/signin">
                     <Signin/>
                     </Route>
                     <Route path exact="/">

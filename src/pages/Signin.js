@@ -87,33 +87,87 @@ const Signin = () => {
 	//Signin form component
 	const signInForm = () => {
 		return (
-			<div className="row">
-				<div className="col-md-6 offset-sm-3 text-left">
-					<form>
-						<div className="form-group">
-							<label className=".text-dark">Email</label>
-							<input
-								type="email"
+			<div className="row mt-5 ">
+				
+			<div className="card text-center md-auto mx-auto "style={{margin:'100px',width:'30rem'}}> 
+
+			<h5 className="card-header info-color white-text text-center py-4">
+			<strong>Sign in</strong>
+			</h5>
+
+
+			<div className="card-body px-lg-5 pt-0">
+
+ 
+  			<form className="text-center" style={{color: "#757575"}} action="#!">
+
+	
+				<div className="md-form">
+				<input type="email"
 								className="form-control"
 								onChange={handleChange("email")}
-								value={email}
-							/>
-						</div>
-						<div className="form-group">
-							<label className=".text-dark">Password</label>
-							<input
+								value={email} id="materialLoginFormEmail" className="form-control" placeholder="E-Mail"/>
+	  
+	</div>
+
+	
+	<div className="md-form">
+	<input
 								type="password"
 								className="form-control"
 								onChange={handleChange("password")}
-								value={password}
+								value={password} id="materialLoginFormPassword" placeholder="Password"
 							/>
-						</div>
-						<button className="btn btn-success btn-block" onClick={formSubmit}>
-							Sign in
-						</button>
-					</form>
-				</div>
+	  
+	</div>
+
+	<div className="d-flex justify-content-around">
+	  <div>
+		
+		<div className="form-check">
+		  <input type="checkbox" className="form-check-input" id="materialLoginFormRemember"/>
+		  <label className="form-check-label" for="materialLoginFormRemember">Remember me</label>
+		</div>
+	  </div>
+	  <div>
+		
+		<a href="">Forgot password?</a>
+	  </div>
+	</div>
+
+	
+	<button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" onClick={formSubmit}>Sign in</button>
+
+	
+	<p>Not a member?
+	  <a href="">Register</a>
+	</p>
+
+	
+	<p>or sign in with:</p>
+	<a type="button" className="btn-floating btn-fb btn-sm">
+	  <i className="fab fa-facebook-f"></i>
+	</a>
+	<a type="button" className="btn-floating btn-tw btn-sm">
+	  <i className="fab fa-twitter"></i>
+	</a>
+	<a type="button" className="btn-floating btn-li btn-sm">
+	  <i className="fab fa-linkedin-in"></i>
+	</a>
+	<a type="button" className="btn-floating btn-git btn-sm">
+	  <i className="fab fa-github"></i>
+	</a>
+
+  	</form>
+  
+
+
+
+	  </div>
 			</div>
+			</div>
+			
+			
 		);
 	};
 

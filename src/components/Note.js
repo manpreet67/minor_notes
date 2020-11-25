@@ -15,7 +15,7 @@ const Note=(props)=>
                
     
                 
-                <div className="card text-center text-white bg-warning" style={{ width: '20rem' }}>
+                <div className="card text-center text-dark bg-light" style={{ width: '20rem' }}>
                 <div className="card-body">
 
             <h1>{props.title}</h1>

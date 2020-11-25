@@ -31,7 +31,7 @@ const Home=()=>
     
     return <>
         
-        <Header/>
+        
         <CreateNote passNote={addNote}/>
         <div className="container">
         <div className="row ">

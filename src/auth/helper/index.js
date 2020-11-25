@@ -2,7 +2,7 @@ import { API } from "../../backened";
 
 //Send user signup data to the backend
 export const signup = (user) => {
-	return fetch(`${API}/user`, {
+	return fetch("http://localhost:5000/user", {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -45,18 +45,18 @@ export const authenticate = (data, next) => {
 //First : It removes jwt token set in the localStorage of browser
 //Second : "next()" is used to fire a callback which will be used in frontend to redirect
 //Third : fetch sends a "GET" req to the backend which clears the "Cookie" at backend thereby signout the user from tha backend
-/*export const signout = (next) => {
-	if (typeof Window !== "undefined") {
-		localStorage.removeItem("jwt");
-		next();
+// export const signout = (next) => {
+// 	if (typeof Window !== "undefined") {
+// 		localStorage.removeItem("jwt");
+// 		next();
 
-		return fetch(`${API}/signout`, {
-			method: "GET",
-		})
-			.then((response) => console.log("Signout successful!"))
-			.catch((err) => console.log(err));
-	}
-}; */
+// 		return fetch(`${API}/signout`, {
+// 			method: "GET",
+// 		})
+// 			.then((response) => console.log("Signout successful!"))
+// 			.catch((err) => console.log(err));
+// 	}
+// }; 
 
 //It check wheather the client's browser localStorage contains JWT token and user data as a key "jwt"
 export const isAuthenticated = () => {

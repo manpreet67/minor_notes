@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
+import 'font-awesome/css/font-awesome.min.css';
 
 const Navbar=()=>{
     return(
@@ -21,6 +21,13 @@ const Navbar=()=>{
         <a class="nav-link" href="/signup">Signup</a>
       </li>
       
+      <div class="search-container ml-auto" >
+    <form action="/action_page.php" >
+      <input type="text" placeholder="Search.." name="search"></input>
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+  
     </ul>
   </div>
 </nav>

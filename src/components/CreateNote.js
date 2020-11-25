@@ -43,7 +43,7 @@ const CreateNote=(props)=>
                 <div className="col">
 
                 
-                <div className="card text-center text-white bg-warning mb-3" style={{ width: '20rem' }}>
+                <div className="card text-center text-white bg-info mb-3" style={{ width: '20rem' }}>
                 <div className="card-body">
                     <form>
                     <div className="form-group">

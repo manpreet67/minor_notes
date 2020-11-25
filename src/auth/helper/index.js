@@ -1,16 +1,20 @@
-import { API } from "../../backened";
+// import { API } from "../../backened";
+
+const API="http://aafcc45e8d09.ngrok.io/"
 
 //Send user signup data to the backend
-export const signup = (user) => {
-	return fetch("http://localhost:5000/user", {
+export const signup = (ourUser) => {
+	return fetch(`${API}user/`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(user),
+		body: JSON.stringify(ourUser),
+		
 	})
 		.then((response) => {
+			console.log(response);
 			return response.json();
 		})
 		.catch((err) => console.log(err));
@@ -18,15 +22,15 @@ export const signup = (user) => {
 
 //Send user user: {email, password} data to the backend and creates "JWT token" and sets Cookie
 //Then if signin is successful returns "JWT token" and "user data" which will be set to localStorage at the frontend
-export const signin = (user) => {
-    console.log(user);
-	return fetch(`${API}/login`, {
+export const signin = (ourUser) => {
+    
+	return fetch(`${API}login`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(user),
+		body: JSON.stringify(ourUser),
 	})
 		.then((response) => {
 			return response.json();
@@ -45,18 +49,18 @@ export const authenticate = (data, next) => {
 //First : It removes jwt token set in the localStorage of browser
 //Second : "next()" is used to fire a callback which will be used in frontend to redirect
 //Third : fetch sends a "GET" req to the backend which clears the "Cookie" at backend thereby signout the user from tha backend
-// export const signout = (next) => {
-// 	if (typeof Window !== "undefined") {
-// 		localStorage.removeItem("jwt");
-// 		next();
+export const signout = (next) => {
+	if (typeof Window !== "undefined") {
+		localStorage.removeItem("jwt");
+		// next();
 
-// 		return fetch(`${API}/signout`, {
-// 			method: "GET",
-// 		})
-// 			.then((response) => console.log("Signout successful!"))
-// 			.catch((err) => console.log(err));
-// 	}
-// }; 
+		// return fetch(`${API}/signout`, {
+		// 	method: "GET",
+		// })
+		// 	.then((response) => console.log("Signout successful!"))
+		// 	.catch((err) => console.log(err));
+	}
+}; 
 
 //It check wheather the client's browser localStorage contains JWT token and user data as a key "jwt"
 export const isAuthenticated = () => {
@@ -68,4 +72,36 @@ export const isAuthenticated = () => {
 	} else {
 		return false;
 	}
+};
+
+export const getNote = () => {
+    
+	return fetch(`${API}/note/`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const deleteNote = (user) => {
+    console.log(user);
+	return fetch(`${API}/note`, {
+		method: "DELETE",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(user),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
 };

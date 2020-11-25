@@ -49,10 +49,10 @@ const Signin = () => {
 	};
 
 	const performRedirect = () => {
-		//Redirect the "Admin User" to "Admin Dashboard" & "Normal User" to " User Dashboard"
+	
 		if (didRedirect) {
 			
-				return <Redirect to="/home" />;
+				return <Redirect to="/" />;
 			
 		}
 	};

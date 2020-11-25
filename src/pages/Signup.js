@@ -33,8 +33,10 @@ const Signup = () => {
 	const formSubmit = (event) => {
 		event.preventDefault();
 		setValues({ ...values, error: false });
-		signup({ firstname,lastname, email, password })
+		console.log(values)
+		signup({first_name: firstname,last_name:lastname,email: email, password: password })
 			.then((data) => {
+				console.log(data)
 				if (data.error) {
 					setValues({ ...values, error: data.error, success: false });
 				} else {
@@ -69,8 +71,7 @@ const Signup = () => {
 		return (
 			<div className="row">
 				<div className="col-md-6 offset-sm-3 text-center">
-					<div
-						className="alert alert-danger"
+					<div className="alert alert-danger"
 						style={{ display: error ? "" : "none" }}
 					>
 						{error}
@@ -83,6 +84,7 @@ const Signup = () => {
 	//Signup form component
 	const signUpForm = () => {
 		return (
+			<div className="row mt-5 ">
 			<div className="card text-center md-auto mx-auto "style={{margin:'100px',width:'30rem'}}>
 
     <h5 className="card-header info-color white-text text-center py-4">
@@ -100,16 +102,16 @@ const Signup = () => {
                    
                     <div className="md-form">
                         <input type="text" id="materialRegisterFormFirstName" className="form-control" onChange={handleChange("firstname")}
-								value={firstname}/>
-                        <label for="materialRegisterFormFirstName">First name</label>
+								value={firstname} placeholder="First Name"/>
+                       
                     </div>
                 </div>
                 <div className="col">
                    
                     <div className="md-form">
                         <input type="email" id="materialRegisterFormLastName" className="form-control" onChange={handleChange("lastname")}
-								value={lastname}/>
-                        <label for="materialRegisterFormLastName">Last name</label>
+								value={lastname} placeholder="Last Name"/>
+                        
                     </div>
                 </div>
             </div>
@@ -117,15 +119,15 @@ const Signup = () => {
             
             <div className="md-form mt-0">
                 <input type="email" id="materialRegisterFormEmail" className="form-control" onChange={handleChange("email")}
-								value={email}/>
-                <label for="materialRegisterFormEmail">E-mail</label>
+								value={email} placeholder="E Mail"/>
+               
             </div>
 
             
             <div className="md-form">
                 <input type="password" id="materialRegisterFormPassword" className="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" onChange={handleChange("password")}
-								value={password}/>
-                <label for="materialRegisterFormPassword">Password</label>
+								value={password} placeholder="Password"/>
+               
                 <small id="materialRegisterFormPasswordHelpBlock" className="form-text text-muted mb-4">
                     At least 8 characters and 1 digit
                 </small>
@@ -135,7 +137,7 @@ const Signup = () => {
             
 
            
-            <button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" onClick={formSubmit}>Sign in</button>
+            <button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" onClick={formSubmit}>Sign up</button>
 
             
             <p>or sign up with:</p>
@@ -165,6 +167,7 @@ const Signup = () => {
 
     </div>
 
+</div>
 </div>
 
 

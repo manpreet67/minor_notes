@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Header from "./Header";
 //import Note from "./auth/helper/index.js";
 import CreateNote from "./CreateNote";
 import Note from "./Note";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import {getNote,isAuthenticated} from "../auth/helper/index";
 
 
 const Home=()=>
@@ -16,6 +17,10 @@ const Home=()=>
             return[...prevData,note];
         });
     };
+    // useEffect(() => {
+    //     getNote({})
+        
+    //   });
 
 
     const onDelete=(id)=>{
@@ -28,7 +33,9 @@ const Home=()=>
         )
 
     };
-    
+    if(isAuthenticated()) 
+    {
+        console.log(isAuthenticated())
     return <>
         
         
@@ -51,6 +58,17 @@ const Home=()=>
         
         
      </>;
+    
+    }
+    else {
+        return <>
+        <div className="display-3 text-center mt-5">
+             Please SignIn first!!!
+            
+            </div>
+            </>;
+    }
 }
+
 
 export default Home;

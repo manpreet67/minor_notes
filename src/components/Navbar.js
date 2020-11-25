@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import {  isAuthenticated } from "../auth/helper/index";
+import {  signout,isAuthenticated } from "../auth/helper/index";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#5bc0de" };
-    // return { color: "#292b2c" };
+    return { color: "#0d101c" };
+    // return { color: "#292b2c" };041a21#5bc0de
   } else {
     return { color: "#ffffff" };
   }
@@ -48,7 +48,7 @@ const currentTab = (history, path) => {
           <ul className="nav bg-info p-2 font-weight-bold">
             <li className="nav-item">
               <Link style={currentTab(history, "/")} className="nav-link" to="/">
-                Home
+                Smart Note
               </Link>
             </li>
            
@@ -93,7 +93,7 @@ const currentTab = (history, path) => {
             )}
             {/* Displays/Returns Signout nav button when user is authenticated, otherwise hides it from navbar */}
             {/* onCLick event fires a callback to initiate "signout" method which fires callback to redirect the user to "/" */}
-            {/* {isAuthenticated() && (
+             {isAuthenticated() && (
               <li
                 className="nav-item"
                 onClick={() => {
@@ -104,13 +104,13 @@ const currentTab = (history, path) => {
               >
                 <Link
                   style={currentTab(history, "/signout")}
-                  className="nav-link text-warning"
-                  to=""
+                  className="nav-link text-white"
+                  to="/signin"
                 >
                   Signout
                 </Link>
               </li>
-            )} */}
+            )} 
           </ul>
                 
         </div>

@@ -1,6 +1,6 @@
 // import { API } from "../../backened";
 
-const API="http://aafcc45e8d09.ngrok.io/"
+const API = "http://127.0.0.1:5000/"
 
 //Send user signup data to the backend
 export const signup = (ourUser) => {
@@ -11,7 +11,7 @@ export const signup = (ourUser) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(ourUser),
-		
+
 	})
 		.then((response) => {
 			console.log(response);
@@ -23,7 +23,7 @@ export const signup = (ourUser) => {
 //Send user user: {email, password} data to the backend and creates "JWT token" and sets Cookie
 //Then if signin is successful returns "JWT token" and "user data" which will be set to localStorage at the frontend
 export const signin = (ourUser) => {
-    
+
 	return fetch(`${API}login`, {
 		method: "POST",
 		headers: {
@@ -41,7 +41,8 @@ export const signin = (ourUser) => {
 //Called after signin succeeds to save the response "JWT token" & "user data" to the localStorage of client's browser
 export const authenticate = (data, next) => {
 	if (typeof Window !== "undefined") {
-		localStorage.setItem("jwt", JSON.stringify(data));
+		console.log(data)
+		localStorage.setItem("jwt", data.idToken);
 		next();
 	}
 };
@@ -60,7 +61,7 @@ export const signout = (next) => {
 		// 	.then((response) => console.log("Signout successful!"))
 		// 	.catch((err) => console.log(err));
 	}
-}; 
+};
 
 //It check wheather the client's browser localStorage contains JWT token and user data as a key "jwt"
 export const isAuthenticated = () => {
@@ -75,14 +76,14 @@ export const isAuthenticated = () => {
 };
 
 export const getNote = () => {
-    
+
 	return fetch(`${API}/note/`, {
 		method: "GET",
 		headers: {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
-		
+
 	})
 		.then((response) => {
 			return response.json();
@@ -91,7 +92,7 @@ export const getNote = () => {
 };
 
 export const deleteNote = (user) => {
-    console.log(user);
+	console.log(user);
 	return fetch(`${API}/note`, {
 		method: "DELETE",
 		headers: {

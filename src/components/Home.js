@@ -49,8 +49,27 @@ async function deleteNote(id) {
     }
 }
 
+async function searchKeyword(value) {
+    try {
+        let url = SERVER + `note/?keywords=${value}`
+        const resp = await fetch.get(url)
+        if (resp.error) {
+            console.error(resp.error)
+            throw new Error(resp.error)
+        }
+        else {
+            return resp
+        }
+    } catch (e) {
+        console.error(e)
+        throw e
+    }
+}
+
 const Home = () => {
     const [addItem, setAddItem] = useState([]);
+    const [searchItem, setSearchItem] = useState("");
+    const [searchData, setSearchData] = useState("")
     const addNote = async (note) => {
         await sendNote(note);
         setAddItem((prevData) => {
@@ -67,6 +86,11 @@ const Home = () => {
         })
     }, [])
 
+    const addEvent = async () => {
+        const data = await searchKeyword(searchItem)
+        setSearchData(() => data)
+    }
+
 
     const onDelete = async (id, apiId) => {
         await deleteNote(apiId)
@@ -80,27 +104,70 @@ const Home = () => {
 
     if (isAuthenticated()) {
         console.log(isAuthenticated())
-        return <>
-
-            <SearchBar addNote={addNote}></SearchBar>
-            <CreateNote passNote={addNote} />
-            <div className="container">
-                <div className="row">
-                    {addItem?.map((val, index) => {
-                        return (<Note key={index}
-                            id={index}
-                            title={val.title}
-                            content={val.content}
-                            apiId={val.id}
-                            deleteItem={onDelete}
-                        />
-                        );
-                    })}
+        console.log(!!!searchData)
+        if (!!!searchData) {
+            return <>
+                <SearchBar addEvent={addEvent} setSearchItem={setSearchItem}></SearchBar>
+                <CreateNote passNote={addNote} />
+                <div className="container">
+                    <div className="row">
+                        {addItem?.map((val, index) => {
+                            return (<Note key={index}
+                                id={index}
+                                title={val.title}
+                                content={val.content}
+                                apiId={val.id}
+                                deleteItem={onDelete}
+                            />
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
+            </>;
+        } else {
+            //GREEN
+            return (
+                <div>
+                    <SearchBar addEvent={addEvent} setSearchItem={setSearchItem}></SearchBar>
+                    <div className="row-md-6">
+                        <ul>
+
+                            {searchData.data.myNotes.map((value, idx) => (
+                                <li>
+                                    <div className="col-md-12" key={idx} style={{ backgroundColor: "green", color: "white" }}>
+                                        {value.doc}
+                                    </div>
+                                    <br />
+                                </li>
+                            ))
+                            }
+                        </ul>
+                        {console.log(searchData)}
 
 
-        </>;
+                    </div >
+                    <div className="row-md-6">
+                        <ul>
+
+                            {searchData.data.extra.map((value, idx) => (
+                                <li>
+
+                                    <div className="col-md-12" key={idx} style={{ backgroundColor: "grey", color: "black" }}>
+                                        {value.doc}
+                                    </div>
+                                    <br />
+                                </li>
+                            ))
+                            }
+                        </ul>
+                        {console.log(searchData)}
+                    </div >
+                </div>
+                //GREY
+            );
+        }
+
+
 
     }
     else {

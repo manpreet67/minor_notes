@@ -1,39 +1,27 @@
 import React, { useState } from "react";
 import fetch from "../utils/apiClient";
+import { MDBCol } from "mdbreact";
+
 
 const SERVER = "http://127.0.0.1:5000/"
 
-async function searchKeyword(value) {
-  try {
-    let url = SERVER + `?keywords=${value}`
-    const resp = await fetch.get(url)
-    if (resp.error) {
-      throw new Error(resp.error)
-    }
-    else {
-      return resp
-    }
-  } catch (e) {
-    console.error(e)
-    throw e
-  }
-}
 
-const SearchBar = () => {
-  const [searchItem, setSearchItem] = useState("");
+
+const SearchBar = (props) => {
   const inputEvent = (event) => {
     const { value } = event.target;
-    setSearchItem(() => value);
+    props.setSearchItem(() => value);
   }
 
-  const addEvent = () => {
-
-  }
   return (
-    <div>
-      <input type="text" value />
+    <div className="row mt-5">
+      {console.log("working")}
+      <MDBCol md="12">
+        <input className="form-control" type="text" placeholder="Search" aria-label="Search" style={{ backgroundColor: "black", color: "white", height: "50px" }} onChange={inputEvent} />
+        <button onClick={props.addEvent}>Search</button>
+      </MDBCol>
     </div>
-  )
+  );
 }
 
 export default SearchBar

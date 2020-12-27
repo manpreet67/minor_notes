@@ -13,7 +13,7 @@ const SERVER = "http://127.0.0.1:5000/"
 
 async function sendNote(note) {
     try {
-        const url = SERVER + "note/";
+        const url = SERVER + "note";
         console.log(SERVER)
         const resp = await fetch.post(url, note)
         if (resp) {
@@ -27,7 +27,7 @@ async function sendNote(note) {
 
 async function getNotes() {
     try {
-        const url = SERVER + "note/";
+        const url = SERVER + "note";
         const resp = await fetch.get(url)
         return resp.data.notes
     } catch (error) {
@@ -38,7 +38,7 @@ async function getNotes() {
 
 async function deleteNote(id) {
     try {
-        const url = SERVER + "note/";
+        const url = SERVER + "note";
         // console.log(id)
         const data = { id: id }
         const resp = await fetch.delete(url, { data: data })
@@ -51,7 +51,7 @@ async function deleteNote(id) {
 
 async function searchKeyword(value) {
     try {
-        let url = SERVER + `note/?keywords=${value}`
+        let url = SERVER + `note?keywords=${value}`
         const resp = await fetch.get(url)
         if (resp.error) {
             console.error(resp.error)

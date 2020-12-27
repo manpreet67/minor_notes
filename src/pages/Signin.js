@@ -34,26 +34,26 @@ const Signin = () => {
 		signin({ email, password })
 			.then((data) => {
 				if (data.error) {
-                    
+
 					setValues({ ...values, error: data.error, loading: false });
 				} else {
-					authenticate(data, () => {
-						setValues({ ...initialValues, didRedirect: true });
-					});
+					localStorage.setItem("jwt", data.idToken);
 				}
 			})
-			.catch((err) =>
-				console.log("Error: Signin request to the server failed!\n", err)
+			.catch((err) => {
+				console.error(err)
+				return console.log("Error: Signin request to the server failed!\n", err)
+			}
 			);
 		//This catch runs whenever there is an error at the backend which is not handled
 	};
 
 	const performRedirect = () => {
-	
-		if (didRedirect) {
-			
-				return <Redirect to="/" />;
-			
+
+		if (values.didRedirect) {
+
+			return <Redirect to="/" />;
+
 		}
 	};
 
@@ -88,97 +88,97 @@ const Signin = () => {
 	const signInForm = () => {
 		return (
 			<div className="row mt-5 ">
-				
-			<div className="card text-center md-auto mx-auto "style={{margin:'100px',width:'30rem'}}> 
 
-			<h5 className="card-header info-color white-text text-center py-4">
-			<strong>Sign in</strong>
-			</h5>
+				<div className="card text-center md-auto mx-auto " style={{ margin: '100px', width: '30rem' }}>
+
+					<h5 className="card-header info-color white-text text-center py-4">
+						<strong>Sign in</strong>
+					</h5>
 
 
-			<div className="card-body px-lg-5 pt-0">
+					<div className="card-body px-lg-5 pt-0">
 
- 
-  			<form className="text-center" style={{color: "#757575"}} action="#!">
 
-	
-				<div className="md-form">
-				<input type="email"
-								className="form-control"
-								onChange={handleChange("email")}
-								value={email} id="materialLoginFormEmail" className="form-control" placeholder="E-Mail"/>
-	  
-	</div>
+						<form className="text-center" style={{ color: "#757575" }} action="#!">
 
-	
-	<div className="md-form">
-	<input
-								type="password"
-								className="form-control"
-								onChange={handleChange("password")}
-								value={password} id="materialLoginFormPassword" placeholder="Password"
-							/>
-	  
-	</div>
 
-	<div className="d-flex justify-content-around">
-	  <div>
-		
-		<div className="form-check">
-		  <input type="checkbox" className="form-check-input" id="materialLoginFormRemember"/>
-		  <label className="form-check-label" for="materialLoginFormRemember">Remember me</label>
-		</div>
-	  </div>
-	  <div>
-		
-		<a href="">Forgot password?</a>
-	  </div>
-	</div>
+							<div className="md-form">
+								<input type="email"
+									className="form-control"
+									onChange={handleChange("email")}
+									value={email} id="materialLoginFormEmail" className="form-control" placeholder="E-Mail" />
 
-	
-	<button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" onClick={formSubmit}>Sign in</button>
+							</div>
 
-	
-	<p>Not a member?
+
+							<div className="md-form">
+								<input
+									type="password"
+									className="form-control"
+									onChange={handleChange("password")}
+									value={password} id="materialLoginFormPassword" placeholder="Password"
+								/>
+
+							</div>
+
+							<div className="d-flex justify-content-around">
+								<div>
+
+									<div className="form-check">
+										<input type="checkbox" className="form-check-input" id="materialLoginFormRemember" />
+										<label className="form-check-label" for="materialLoginFormRemember">Remember me</label>
+									</div>
+								</div>
+								<div>
+
+									<a href="">Forgot password?</a>
+								</div>
+							</div>
+
+
+							<button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" onClick={formSubmit}>Sign in</button>
+
+
+							<p>Not a member?
 	  <a href="">Register</a>
-	</p>
-
-	
-	<p>or sign in with:</p>
-	<a type="button" className="btn-floating btn-fb btn-sm">
-	  <i className="fab fa-facebook-f"></i>
-	</a>
-	<a type="button" className="btn-floating btn-tw btn-sm">
-	  <i className="fab fa-twitter"></i>
-	</a>
-	<a type="button" className="btn-floating btn-li btn-sm">
-	  <i className="fab fa-linkedin-in"></i>
-	</a>
-	<a type="button" className="btn-floating btn-git btn-sm">
-	  <i className="fab fa-github"></i>
-	</a>
-
-  	</form>
-  
+							</p>
 
 
+							<p>or sign in with:</p>
+							<a type="button" className="btn-floating btn-fb btn-sm">
+								<i className="fab fa-facebook-f"></i>
+							</a>
+							<a type="button" className="btn-floating btn-tw btn-sm">
+								<i className="fab fa-twitter"></i>
+							</a>
+							<a type="button" className="btn-floating btn-li btn-sm">
+								<i className="fab fa-linkedin-in"></i>
+							</a>
+							<a type="button" className="btn-floating btn-git btn-sm">
+								<i className="fab fa-github"></i>
+							</a>
 
-	  </div>
+						</form>
+
+
+
+
+					</div>
+				</div>
 			</div>
-			</div>
-			
-			
+
+
 		);
 	};
 
 	return (
 		<div>
-		
-				{loadingMessage()}
-				{errorMessage()}
-				{signInForm()}
-				{performRedirect()}
-		
+
+			{loadingMessage()}
+			{errorMessage()}
+			{signInForm()}
+			{performRedirect()}
+
 		</div>
 	);
 };

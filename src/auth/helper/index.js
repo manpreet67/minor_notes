@@ -1,10 +1,10 @@
 // import { API } from "../../backened";
 
-const API = "http://127.0.0.1:5000/"
+const API = "http://0dfa4a198706.ngrok.io"
 
 //Send user signup data to the backend
 export const signup = (ourUser) => {
-	return fetch(`${API}user/`, {
+	return fetch(`${API}/user`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -24,7 +24,7 @@ export const signup = (ourUser) => {
 //Then if signin is successful returns "JWT token" and "user data" which will be set to localStorage at the frontend
 export const signin = (ourUser) => {
 
-	return fetch(`${API}login`, {
+	return fetch(`${API}/login`, {
 		method: "POST",
 		headers: {
 			Accept: "application/json",

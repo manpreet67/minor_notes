@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth/helper/index";
 
 
@@ -30,14 +30,15 @@ const Signin = () => {
 	//Submits the sign in form and gets the response token along with user data from the backend
 	const formSubmit = (event) => {
 		event.preventDefault();
-		setValues({ ...values, loading: true });
+		setValues({ ...values, loading: true});
 		signin({ email, password })
 			.then((data) => {
+				 console.log(data);
 				if (data.error) {
-
-					setValues({ ...values, error: data.error, loading: false });
+					setValues({ ...values, error: data.error, loading: false});
 				} else {
 					localStorage.setItem("jwt", data.idToken);
+					setValues({ ...values, error: data.error, loading: false,didRedirect:true});
 				}
 			})
 			.catch((err) => {
@@ -61,7 +62,7 @@ const Signin = () => {
 	const loadingMessage = () => {
 		return (
 			loading && (
-				<div className="alert alert-info text-center">
+				<div className="alert alert-info text-center mt-5">
 					<h2>Loading...</h2>
 				</div>
 			)
@@ -140,7 +141,7 @@ const Signin = () => {
 
 
 							<p>Not a member?
-	  <a href="">Register</a>
+	 						 <Link to="/signup">Register</Link>
 							</p>
 
 

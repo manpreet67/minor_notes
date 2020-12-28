@@ -54,17 +54,17 @@ const Navbar = ({ history }) => (
 
 
       {/* Displays/Returns Dashboard nav button when user is authenticated, otherwise hides it from navbar */}
-      {isAuthenticated() && (
+      {/* {isAuthenticated() && (
         <li className="nav-item">
           <Link
             style={currentTab(history, "/")}
             className="nav-link"
             to="/"
           >
-            Home
+            Smart Note
                 </Link>
         </li>
-      )}
+      )} */}
 
 
 

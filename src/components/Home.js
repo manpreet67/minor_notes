@@ -9,7 +9,7 @@ import "../../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import { getNote, isAuthenticated } from "../auth/helper/index";
 import SearchBar from "./SearchBar";
 
-const SERVER = "http://127.0.0.1:5000/"
+const SERVER = "http://0dfa4a198706.ngrok.io"
 
 async function sendNote(note) {
     try {

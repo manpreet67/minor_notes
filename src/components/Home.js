@@ -9,7 +9,7 @@ import "../../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import { getNote, isAuthenticated } from "../auth/helper/index";
 import SearchBar from "./SearchBar";
 
-const SERVER = "http://b4c3294aba04.ngrok.io"
+const SERVER = "http://4ae9136a7eec.ngrok.io/"
 
 async function sendNote(note) {
     try {
@@ -17,6 +17,7 @@ async function sendNote(note) {
         console.log(SERVER)
         const resp = await fetch.post(url, note)
         if (resp) {
+            console.log(resp)
             return resp
         }
     } catch (error) {
@@ -66,6 +67,21 @@ async function searchKeyword(value) {
     }
 }
 
+async function getLabels(id) {
+    try {
+        const url = SERVER + "labels";
+        const data = { id: id }
+        console.log(data)
+        const resp = await fetch.post(url, { data: data })
+        return resp
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+    
+}
+
+
 const Home = () => {
     const [addItem, setAddItem] = useState([]);
     const [searchItem, setSearchItem] = useState("");
@@ -112,11 +128,17 @@ const Home = () => {
                 <div className="container">
                     <div className="row">
                         {addItem?.map((val, index) => {
+                            console.log(val);
+                           console.log(getLabels(val.id));
+                           
+                           
                             return (<Note key={index}
                                 id={index}
                                 title={val.title}
                                 content={val.content}
                                 apiId={val.id}
+                                // label={val.label}
+                                //label
                                 deleteItem={onDelete}
                             />
                             );
@@ -129,7 +151,7 @@ const Home = () => {
             return (
                 <div>
                     <SearchBar addEvent={addEvent} setSearchItem={setSearchItem}></SearchBar>
-                    <div className="row-md-6">
+                    {/* <div className="row-md-6">
                         <ul>
 
                             {searchData.data.myNotes.map((value, idx) => (
@@ -141,12 +163,31 @@ const Home = () => {
                                 </li>
                             ))
                             }
-                        </ul>
-                        {console.log(searchData)}
+                        </ul> */}
 
 
-                    </div >
-                    <div className="row-md-6">
+                        <div className="mt-3 ">
+
+                        {searchData.data.myNotes.map((value, idx) => (
+                            <div className="col d-flex justify-content-center">
+                            <div className="card mt-3 mb-3 w-75 px-3 py-3" style={{ backgroundColor: "#3f1866", color: "white" }}>
+                                <div className="card-text" key={idx} >
+                                    {value.doc}
+                                </div>
+                            </div>
+                            </div>))
+                        }
+                            //  {console.log(searchData)}
+
+
+
+                    
+                        </div>
+
+
+
+                    {/* </div > */}
+                    {/* <div className="row-md-6">
                         <ul>
 
                             {searchData.data.extra.map((value, idx) => (
@@ -163,7 +204,30 @@ const Home = () => {
                         {console.log(searchData)}
                     </div >
                 </div>
+
+                
+
                 //GREY
+            ); */}
+                    
+
+                        {searchData.data.extra.map((value, idx) => (
+                            <div className="col d-flex justify-content-center">
+                            <div className="card mt-3 mb-3 w-75 px-3 py-3" style={{ backgroundColor: "grey", color: "black"}} >
+                                <div className="card-text" key={idx} >
+                                    {value.doc}
+                                </div>
+                            </div>
+                            </div>
+                            ))
+                        }
+                         //  {console.log(searchData)}
+
+
+
+                    </div>
+                
+                 
             );
         }
 
@@ -172,11 +236,11 @@ const Home = () => {
     }
     else {
         return <>
-            <div className="display-3 text-center mt-5">
-                Please SignIn first!!!
+                        <div className="display-3 text-center mt-5">
+                            Please SignIn first!!!
 
             </div>
-        </>;
+                    </>;
     }
 }
 

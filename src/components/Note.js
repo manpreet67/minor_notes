@@ -20,6 +20,8 @@ const Note = (props) => {
                 <h1>{props.title}</h1>
                 <br />
                 <p>{props.content}</p>
+                <br/>
+                {/* <h4> <span class="badge badge-secondary">{props.label}</span></h4> */}
                 <button className="btn" onClick={deleteNote}>
                     <DeleteIcon className="del"> </DeleteIcon>
                 </button>

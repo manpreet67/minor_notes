@@ -1,6 +1,6 @@
 // import { API } from "../../backened";
 
-const API = "http://4ae9136a7eec.ngrok.io"
+const API = "http://127.0.0.1:5000"
 
 //Send user signup data to the backend
 export const signup = (ourUser) => {

@@ -3,7 +3,7 @@ import fetch from "../utils/apiClient";
 import { MDBCol } from "mdbreact";
 
 
-const SERVER = "http://4ae9136a7eec.ngrok.io/"
+const SERVER = "http://127.0.0.1:5000/"
 
 
 
@@ -21,13 +21,13 @@ const SearchBar = (props) => {
         <button onClick={props.addEvent}>Search</button>
       </MDBCol> */}
       <div className="wrap">
-   <div className="search">
-      <input type="text" className="searchTerm" placeholder="What are you looking for?" onChange={inputEvent}/>
-      <button type="submit" className="searchButton" onClick={props.addEvent} >
-        <i className="fa fa-search"></i>
-     </button>
-   </div>
-</div>
+        <div className="search">
+          <input type="text" className="searchTerm" placeholder="What are you looking for?" onChange={inputEvent} />
+          <button type="submit" className="searchButton" onClick={props.addEvent} >
+            <i className="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -36,7 +36,7 @@ const Note = (props) => {
     //         console.log(labels)
     //     })
     // })
-
+        
     return <>
 
 
@@ -49,10 +49,12 @@ const Note = (props) => {
                 <h1>{props.title}</h1>
                 <br />
                 <p>{props.content}</p>
+                {/* {console.log(props.label)} */}
                 <br/>
-                <h4> 
-                    
-                    {
+                {props.label!==undefined &&(
+                    <h4> 
+                      {
+                        
                        props.label.map((val,idx)=>{
                     
                         // console.log(val)
@@ -61,11 +63,18 @@ const Note = (props) => {
                             <span key={idx} className="badge badge-dark"> {val}</span>
                             </div>
                             
-                        )
-                       })
+                            )
+                        })
+                    // window.location.reload(false)
+                        
+                      
                  
                     }  
                     </h4>
+                    
+
+                )}
+                
                 <button className="btn" onClick={deleteNote}>
                     <DeleteIcon className="del"> </DeleteIcon>
                 </button>

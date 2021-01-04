@@ -9,7 +9,9 @@ import "../../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import { getNote, isAuthenticated } from "../auth/helper/index";
 import SearchBar from "./SearchBar";
 
-const SERVER = "http://b4c3294aba04.ngrok.io"
+
+const SERVER = "http://5c38cfaeee40.ngrok.io/"
+
 
 async function sendNote(note) {
     try {
@@ -17,6 +19,7 @@ async function sendNote(note) {
         console.log(SERVER)
         const resp = await fetch.post(url, note)
         if (resp) {
+            console.log(resp)
             return resp
         }
     } catch (error) {
@@ -29,7 +32,16 @@ async function getNotes() {
     try {
         const url = SERVER + "note";
         const resp = await fetch.get(url)
+        console.log(resp.data.notes)
+        
+        for(let i=0;i<resp.data.notes.length;i++){
+            
+            resp.data.notes[i].labels= await (await getLabels(resp.data.notes[i].id)).data.labels
+           
+        }
+        console.log(resp.data.notes)
         return resp.data.notes
+
     } catch (error) {
         console.error(error)
         throw error
@@ -66,15 +78,33 @@ async function searchKeyword(value) {
     }
 }
 
+async function getLabels(id) {
+    try {
+        const url = SERVER + "labels";
+        const data = { id: id }
+        const resp = await fetch.post(url, data)
+        console.log(resp)
+        return resp
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+
+
+
 const Home = () => {
     const [addItem, setAddItem] = useState([]);
     const [searchItem, setSearchItem] = useState("");
     const [searchData, setSearchData] = useState("")
+    // const [loader,setLoader]=useState(false)
     const addNote = async (note) => {
         await sendNote(note);
         setAddItem((prevData) => {
             return [...prevData, note];
         });
+        // window.location.reload();
     };
 
     useEffect(() => {
@@ -86,8 +116,21 @@ const Home = () => {
         })
     }, [])
 
+
+    // const loadingMessage = () => {
+    //     return (
+    //         loader && (
+    //             <div className="alert alert-info text-center mt-5">
+    //                 <h2>Loading...</h2>
+    //             </div>
+    //         )
+    //     );
+    // };
+
     const addEvent = async () => {
+        // setLoader(true)
         const data = await searchKeyword(searchItem)
+        // setLoader(false)
         setSearchData(() => data)
     }
 
@@ -102,21 +145,51 @@ const Home = () => {
 
     };
 
+    // const findLabels =async(apiId)=>{
+    //     const labels=await getLabels(apiId)
+    //         console.log(labels)
+    //         return labels;
+    // }
+    
+
+    
+
     if (isAuthenticated()) {
         console.log(isAuthenticated())
         console.log(!!!searchData)
         if (!!!searchData) {
             return <>
+                {/* {loadingMessage} */}
                 <SearchBar addEvent={addEvent} setSearchItem={setSearchItem}></SearchBar>
+                
                 <CreateNote passNote={addNote} />
                 <div className="container">
                     <div className="row">
                         {addItem?.map((val, index) => {
+
+                            // console.log(val);
+                         //console.log(val.labels);
+                                //const labels=getLabels(val.id);
+                                // const label=(async () => await getLabels([val.id]))().then(data)=>{
+                                //     console.l
+                                    
+                                // };
+                                
+                                
+                                
+                                
+                           
+
+
                             return (<Note key={index}
+
                                 id={index}
                                 title={val.title}
                                 content={val.content}
                                 apiId={val.id}
+                                
+                                label={val.labels}
+                                //label
                                 deleteItem={onDelete}
                             />
                             );
@@ -129,7 +202,7 @@ const Home = () => {
             return (
                 <div>
                     <SearchBar addEvent={addEvent} setSearchItem={setSearchItem}></SearchBar>
-                    <div className="row-md-6">
+                    {/* <div className="row-md-6">
                         <ul>
 
                             {searchData.data.myNotes.map((value, idx) => (
@@ -141,12 +214,32 @@ const Home = () => {
                                 </li>
                             ))
                             }
-                        </ul>
-                        {console.log(searchData)}
+                        </ul> */}
 
 
-                    </div >
-                    <div className="row-md-6">
+                    <div className="mt-3 ">
+
+                        {searchData.data.myNotes.map((value, idx) => (
+                            <div className="col d-flex justify-content-center">
+
+                            <div className="card mt-3 mb-3 w-50 px-3 py-3" style={{ backgroundColor: "#3432a8", color: "white" }}>
+                                <div className="card-text" key={idx} >
+                                    {value.doc}
+
+                                </div>
+                            </div>))
+                        }
+                            //  {console.log(searchData)}
+
+
+
+
+                    </div>
+
+
+
+                    {/* </div > */}
+                    {/* <div className="row-md-6">
                         <ul>
 
                             {searchData.data.extra.map((value, idx) => (
@@ -163,7 +256,31 @@ const Home = () => {
                         {console.log(searchData)}
                     </div >
                 </div>
+
+
+
                 //GREY
+            ); */}
+
+
+                        {searchData.data.extra.map((value, idx) => (
+                            <div className="col d-flex justify-content-center">
+                            <div className="card mt-3 mb-3 w-75 px-3 py-3" style={{ backgroundColor: "#88a89e", color: "black"}} >
+
+                                <div className="card-text" key={idx} >
+                                    {value.doc}
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                    }
+                         //  {console.log(searchData)}
+
+
+
+                </div>
+
+
             );
         }
 

@@ -9,7 +9,9 @@ import "../../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import { getNote, isAuthenticated } from "../auth/helper/index";
 import SearchBar from "./SearchBar";
 
+
 const SERVER = "http://5c38cfaeee40.ngrok.io/"
+
 
 async function sendNote(note) {
     try {
@@ -164,6 +166,7 @@ const Home = () => {
                 <div className="container">
                     <div className="row">
                         {addItem?.map((val, index) => {
+
                             // console.log(val);
                          //console.log(val.labels);
                                 //const labels=getLabels(val.id);
@@ -175,8 +178,11 @@ const Home = () => {
                                 
                                 
                                 
-                            return (
-                            <Note key={index}
+                           
+
+
+                            return (<Note key={index}
+
                                 id={index}
                                 title={val.title}
                                 content={val.content}
@@ -211,23 +217,24 @@ const Home = () => {
                         </ul> */}
 
 
-                        <div className="mt-3 ">
+                    <div className="mt-3 ">
 
                         {searchData.data.myNotes.map((value, idx) => (
                             <div className="col d-flex justify-content-center">
+
                             <div className="card mt-3 mb-3 w-50 px-3 py-3" style={{ backgroundColor: "#3432a8", color: "white" }}>
                                 <div className="card-text" key={idx} >
                                     {value.doc}
+
                                 </div>
-                            </div>
                             </div>))
                         }
                             //  {console.log(searchData)}
 
 
 
-                    
-                        </div>
+
+                    </div>
 
 
 
@@ -250,29 +257,30 @@ const Home = () => {
                     </div >
                 </div>
 
-                
+
 
                 //GREY
             ); */}
-                    
+
 
                         {searchData.data.extra.map((value, idx) => (
                             <div className="col d-flex justify-content-center">
                             <div className="card mt-3 mb-3 w-75 px-3 py-3" style={{ backgroundColor: "#88a89e", color: "black"}} >
+
                                 <div className="card-text" key={idx} >
                                     {value.doc}
                                 </div>
                             </div>
-                            </div>
-                            ))
-                        }
+                        </div>
+                    ))
+                    }
                          //  {console.log(searchData)}
 
 
 
-                    </div>
-                
-                 
+                </div>
+
+
             );
         }
 
@@ -281,11 +289,11 @@ const Home = () => {
     }
     else {
         return <>
-                        <div className="display-3 text-center mt-5">
-                            Please SignIn first!!!
+            <div className="display-3 text-center mt-5">
+                Please SignIn first!!!
 
             </div>
-                    </>;
+        </>;
     }
 }
 

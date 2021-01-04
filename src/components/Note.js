@@ -1,13 +1,42 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import DeleteIcon from '@material-ui/icons/Delete';
+import fetch from "../utils/apiClient"
 
+// const SERVER = "http://5c38cfaeee40.ngrok.io/"
+
+// async function getLabelsfunc(id) {
+//     try {
+//         const url = SERVER + "labels";
+//         const data = { id: id }
+//         const resp = await fetch.post(url, data)
+//         return resp
+//     } catch (error) {
+//         console.error(error)
+//         throw error
+//     }
+// }
 
 const Note = (props) => {
 
+    // const [labels, getlabels] = useState([])
+    
 
     const deleteNote = () => {
         props.deleteItem(props.id, props.apiId);
     }
+    // const labelNote=()=>{
+       
+    //       return(  <span class="badge badge-secondary">ab</span>);
+
+        
+    // }
+    // useEffect(() => {
+    //     getLabelsfunc(props.apiId).then(data=>{
+    //         getlabels(data.data.labels)
+    //         console.log(labels)
+    //     })
+    // })
+
     return <>
 
 
@@ -21,7 +50,22 @@ const Note = (props) => {
                 <br />
                 <p>{props.content}</p>
                 <br/>
-                {/* <h4> <span class="badge badge-secondary">{props.label}</span></h4> */}
+                <h4> 
+                    
+                    {
+                       props.label.map((val,idx)=>{
+                    
+                        // console.log(val)
+                        return(
+                            <div className="mx-3">
+                            <span key={idx} className="badge badge-dark"> {val}</span>
+                            </div>
+                            
+                        )
+                       })
+                 
+                    }  
+                    </h4>
                 <button className="btn" onClick={deleteNote}>
                     <DeleteIcon className="del"> </DeleteIcon>
                 </button>

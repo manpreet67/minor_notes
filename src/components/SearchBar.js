@@ -3,7 +3,7 @@ import fetch from "../utils/apiClient";
 import { MDBCol } from "mdbreact";
 
 
-const SERVER = "http://4ae9136a7eec.ngrok.io/"
+const SERVER = "http://5c38cfaeee40.ngrok.io/"
 
 
 

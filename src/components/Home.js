@@ -10,7 +10,7 @@ import { getNote, isAuthenticated } from "../auth/helper/index";
 import SearchBar from "./SearchBar";
 
 
-const SERVER = "http://5c38cfaeee40.ngrok.io/"
+const SERVER = "http://985c4acdebe2.ngrok.io/"
 
 
 async function sendNote(note) {
@@ -226,6 +226,7 @@ const Home = () => {
                                 <div className="card-text" key={idx} >
                                     {value.doc}
 
+                                </div>
                                 </div>
                             </div>))
                         }

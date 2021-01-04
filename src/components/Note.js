@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import DeleteIcon from '@material-ui/icons/Delete';
 import fetch from "../utils/apiClient"
 
-// const SERVER = "http://5c38cfaeee40.ngrok.io/"
+// const SERVER = "http://985c4acdebe2.ngrok.io/"
 
 // async function getLabelsfunc(id) {
 //     try {

@@ -4,7 +4,7 @@ import { MDBCol } from "mdbreact";
 
 
 
-const SERVER = "http://5c38cfaeee40.ngrok.io/"
+const SERVER = "http://985c4acdebe2.ngrok.io/"
 
 
 
